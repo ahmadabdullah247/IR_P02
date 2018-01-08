@@ -1,5 +1,6 @@
 package irp02;
 
+import java.io.IOException;
 
 public class Main {
 
@@ -12,11 +13,17 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		Crawler crawler = new Crawler(1);
+		Crawler crawler = new Crawler(0);
 		Filer filer = new Filer();
-//		
+//		Indexer indexer = new Indexer("/Users/ollostudio/Desktop/IR/IR_P02/index/");
+		
+		System.out.println("Crawling started");
+		System.out.print("[");
 		crawler.getAllURL("http://www.mkyong.com/",0);
+		System.out.println("]");
 		filer.createFile("/Users/ollostudio/Desktop/IR/IR_P02/index/pages.txt",crawler.urls);	
+		System.out.println("Indexing documents");
+//		indexer.indexDocuments(crawler.urls);	
 		hashLine();
 	}
 }

@@ -20,7 +20,7 @@ public class Crawler {
 	public void getAllURL(String URL, int depth) {
 		if ((!urls.contains(URL) && (depth <= maxDepth))) {
 			try {
-				// System.out.println(URL + "\t" + depth);
+				System.out.print("#");
 				urls.add(normalize(URL) + "\t" + depth + "\n");
 
 				Document document = Jsoup.connect(URL).get();
@@ -33,6 +33,18 @@ public class Crawler {
 			} catch (IOException e) {
 				System.err.println("Error :: " + e.getMessage());
 			}
+		}
+	}
+
+	public String getText(String URL) {
+		try {
+			Document document = Jsoup.connect(URL).get();
+			String titleText = document.title().toString();
+			String bodyText = document.body().text();
+			return titleText + " " + bodyText;
+		} catch (IOException e) {
+			System.err.println("Error :: " + e.getMessage());
+			return null;
 		}
 	}
 
