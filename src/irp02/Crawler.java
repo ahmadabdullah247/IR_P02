@@ -20,7 +20,6 @@ public class Crawler {
 	public void getAllURL(String URL, int depth) {
 		if ((!urls.contains(URL) && (depth <= maxDepth))) {
 			try {
-				System.out.print("#");
 				urls.add(normalize(URL) + "\t" + depth + "\n");
 
 				Document document = Jsoup.connect(URL).get();

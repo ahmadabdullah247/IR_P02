@@ -1,29 +1,39 @@
 package irp02;
 
-import java.io.IOException;
+import java.io.File;
 
 public class Main {
-
-	// INPUT : Null
-	// OUTPUT : Null
-	// DESCRIPTION : Print line on console
-	public static void hashLine() {
-		System.out.println(
-				"#########################################################################################################");
+	String indexDirectoryPath;
+	
+	public Main(String path){
+		indexDirectoryPath = path;
+	}
+	
+	public void deleteIndex(File dir) {
+		try {
+			for (File file : dir.listFiles()) {
+				if (file.isDirectory())
+					deleteIndex(file);
+				file.delete();
+			}
+		} catch (NullPointerException e) {
+			System.out.println("Given path does not has any files.");
+		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
+		
+		Main mainApp = new Main("F:/Books/Third Semester/Informtation Retrieval/IR_P02/index/");
 		Crawler crawler = new Crawler(0);
 		Filer filer = new Filer();
-//		Indexer indexer = new Indexer("/Users/ollostudio/Desktop/IR/IR_P02/index/");
-		
 		System.out.println("Crawling started");
-		System.out.print("[");
 		crawler.getAllURL("http://www.mkyong.com/",0);
-		System.out.println("]");
-		filer.createFile("/Users/ollostudio/Desktop/IR/IR_P02/index/pages.txt",crawler.urls);	
+		filer.createFile(mainApp.indexDirectoryPath+"pages.txt",
+				crawler.urls);
+		System.out.println("Crawling Ended");
 		System.out.println("Indexing documents");
-//		indexer.indexDocuments(crawler.urls);	
-		hashLine();
+		Indexer indexer = new Indexer(mainApp.indexDirectoryPath);
+		mainApp.deleteIndex(new File(mainApp.indexDirectoryPath));
+		indexer.indexURLData(crawler.urls);
 	}
 }
