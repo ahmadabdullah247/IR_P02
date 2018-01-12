@@ -21,16 +21,20 @@ public class Crawler {
 		if ((!urls.contains(URL) && (depth <= maxDepth))) {
 			try {
 				urls.add(normalize(URL) + "\t" + depth + "\n");
-
 				Document document = Jsoup.connect(URL).get();
-				Elements elements = document.select("a[href]");
-
-				depth++;
-				for (Element anchorTag : elements) {
-					getAllURL(anchorTag.attr("abs:href"), depth);
+				if (document != null) {
+					Elements elements = document.select("a[href]");
+					 System.out.print(":");
+					depth++;
+					for (Element anchorTag : elements) {
+						getAllURL(anchorTag.attr("abs:href"), depth);
+					}
+				} else {
+					System.out.println("Time out :: " + URL);
 				}
 			} catch (IOException e) {
 				System.err.println("Error :: " + e.getMessage());
+				System.err.println("URL :: " + URL);
 			}
 		}
 	}
@@ -48,7 +52,7 @@ public class Crawler {
 	}
 
 	private String normalize(String URL) {
-		if (URL.substring(URL.length() - 1).equals("/")) {
+		if (URL.length() > 0 && URL.substring(URL.length() - 1).equals("/")) {
 			URL = URL.substring(0, URL.length() - 1);
 		}
 		URL = URL.toLowerCase();
