@@ -84,9 +84,12 @@ public class Indexer {
 		contentField.setStored(true);
 		contentField.setTokenized(true);
 		// index file Content
-		contentValue = new Field(LuceneConstants.CONTENTS, porterstemmer(crawler.getText(url)).toLowerCase(),
-				contentField);
-
+		if (porterstemmer(crawler.getText(url)) != "") {
+			contentValue = new Field(LuceneConstants.CONTENTS, porterstemmer(crawler.getText(url)).toLowerCase(),
+					contentField);
+		} else {
+			return null;
+		}
 		// add field to documents which will be handled by indexwriter
 		URLData.add(urlValue);
 		URLData.add(contentValue);
@@ -95,18 +98,15 @@ public class Indexer {
 
 	public void indexURLData(HashSet<String> urls) {
 		// index data for all the urls
-		for (String url : urls) {
-			Document document = initilizeDocumentwithFields(url.split("\t")[0]);
-			try {
+		try {
+			for (String url : urls) {
+				Document document = initilizeDocumentwithFields(url.split("\t")[0]);
 				if (document != null) {
 					indexwriter.addDocument(document);
 				}
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
-		}
-		try {
 			indexwriter.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
