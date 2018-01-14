@@ -9,14 +9,16 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Crawler {
-	private int maxDepth;
-	public HashSet<String> urls;
+	private int maxDepth; // Maximum depth to crawl
+	public HashSet<String> urls;	// Save unique URLs only 
 
+	// Constructor
 	public Crawler(int depth) {
-		urls = new HashSet<>();
 		maxDepth = depth;
+		urls = new HashSet<>();
 	}
 
+	// Get all URLs and save them in urls variable
 	public void getAllURL(String URL, int depth) {
 		if ((!urls.contains(URL) && (depth <= maxDepth))) {
 			try {
@@ -39,6 +41,7 @@ public class Crawler {
 		}
 	}
 
+	// Get text from title and body of HTML pages (for indexer)
 	public String getText(String URL) {
 		try {
 			Document document = Jsoup.connect(URL).get();
@@ -51,6 +54,7 @@ public class Crawler {
 		}
 	}
 
+	// Remove '/' from end of URL
 	private String normalize(String URL) {
 		if (URL.length() > 0 && URL.substring(URL.length() - 1).equals("/")) {
 			URL = URL.substring(0, URL.length() - 1);
