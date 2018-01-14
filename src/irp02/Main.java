@@ -16,9 +16,9 @@ public class Main {
 		///////////////////////////////////////////////////////////////////////////////////
 
 		crawlDepth = 1;
-		seedURL = "http://www.mkyong.com/";
+		seedURL = "http://www.ovgu.de/";
 		indexFolderPath = "/Users/ollostudio/Desktop/IR/IR_P02/index/";
-		searchQuery = "php";
+		searchQuery = "Für";
 
 		// Crawl to N depth
 		System.out.println("Crawling started");

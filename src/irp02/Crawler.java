@@ -10,7 +10,7 @@ import org.jsoup.select.Elements;
 
 public class Crawler {
 	private int maxDepth; // Maximum depth to crawl
-	public HashSet<String> urls;	// Save unique URLs only 
+	public HashSet<String> urls; // Save unique URLs only
 
 	// Constructor
 	public Crawler(int depth) {
@@ -26,10 +26,12 @@ public class Crawler {
 				Document document = Jsoup.connect(URL).get();
 				if (document != null) {
 					Elements elements = document.select("a[href]");
-					 System.out.print(":");
+					System.out.print(":");
 					depth++;
 					for (Element anchorTag : elements) {
-						getAllURL(anchorTag.attr("abs:href"), depth);
+						if (this.isURL(anchorTag.attr("abs:href"))) {
+							getAllURL(anchorTag.attr("abs:href"), depth);
+						}
 					}
 				} else {
 					System.out.println("Time out :: " + URL);
@@ -39,6 +41,12 @@ public class Crawler {
 				System.err.println("URL :: " + URL);
 			}
 		}
+	}
+	
+	// Check if href in anchor tag is URL
+	public boolean isURL(String url) {
+		return url
+				.matches("^http(s{0,1})://[a-zA-Z0-9_/\\-\\.]+\\.([A-Za-z/]{2,5})[a-zA-Z0-9_/\\&\\?\\=\\-\\.\\~\\%]*");
 	}
 
 	// Get text from title and body of HTML pages (for indexer)
