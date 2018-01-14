@@ -14,39 +14,39 @@ public class Main {
 		////////////////////////////////// For IDE
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
-		
+
 		// Test query
-		// java -jar IR02.jar http://www.ovgu.de/ 1 /Users/ollostudio/Desktop/IR/IR_P02/index/ Für
-		
-		
-//		 crawlDepth = 1;
-//		 seedURL = "http://www.ovgu.de/";
-//		 indexFolderPath = "/Users/ollostudio/Desktop/IR/IR_P02/index/";
-//		 searchQuery = "Für";
-//		
-//		 // Crawl to N depth
-//		 System.out.println("Crawling started");
-//		 Crawler crawler = new Crawler(crawlDepth);
-//		 crawler.getAllURL(seedURL, 0);
-//		 System.out.println(":");
-//		
-//		 // Create page.txt file
-//		 Filer filer = new Filer();
-//		 filer.createFile(indexFolderPath, crawler.urls);
-//		 System.out.println("Crawling Ended");
-//		
-//		 // Index URLS if not indexed or don't find a index folder
-//		 if (filer.findPath()) {
-//		 System.out.println("Indexing documents");
-//		 Indexer indexer = new Indexer(indexFolderPath);
-//		 indexer.indexURLData(crawler.urls);
-//		 System.out.println("Indexing complete");
-//		 }
-//		 // Search query and rank top 10 results
-//		 System.out.println("Searching documents for : " + searchQuery);
-//		 Searcher searcher = new Searcher(indexFolderPath);
-//		 searcher.searchIndexedFiles(searchQuery);
-//		 System.out.println("Searching complete");
+		// java -jar IR02.jar http://www.ovgu.de/ 1
+		// /Users/ollostudio/Desktop/IR/IR_P02/index/ Für
+
+		// crawlDepth = 1;
+		// seedURL = "http://www.ovgu.de/";
+		// indexFolderPath = "/Users/ollostudio/Desktop/IR/IR_P02/index/";
+		// searchQuery = "Für";
+		//
+		// // Crawl to N depth
+		// System.out.println("Crawling started");
+		// Crawler crawler = new Crawler(crawlDepth);
+		// crawler.getAllURL(seedURL, 0);
+		// System.out.println(":");
+		//
+		// // Create page.txt file
+		// Filer filer = new Filer();
+		// filer.createFile(indexFolderPath, crawler.urls);
+		// System.out.println("Crawling Ended");
+		//
+		// // Index URLS if not indexed or don't find a index folder
+		// if (filer.findPath()) {
+		// System.out.println("Indexing documents");
+		// Indexer indexer = new Indexer(indexFolderPath);
+		// indexer.indexURLData(crawler.urls);
+		// System.out.println("Indexing complete");
+		// }
+		// // Search query and rank top 10 results
+		// System.out.println("Searching documents for : " + searchQuery);
+		// Searcher searcher = new Searcher(indexFolderPath);
+		// searcher.searchIndexedFiles(searchQuery);
+		// System.out.println("Searching complete");
 
 		///////////////////////////////////////////////////////////////////////////////////
 		////////////////////////// For Console app
@@ -65,6 +65,7 @@ public class Main {
 			seedURL = args[0];
 			crawlDepth = Integer.parseInt(args[1]);
 			searchQuery = args[2];
+			indexFolderPath = "./Index";
 			consoleCase = "INDEXED";
 			break;
 		default:
@@ -103,7 +104,9 @@ public class Main {
 			System.out.println("Searching complete");
 		}
 	}
+
 	public static void hashLine() {
-		System.out.println("###############################################################################################################");
+		System.out.println(
+				"###############################################################################################################");
 	}
 }

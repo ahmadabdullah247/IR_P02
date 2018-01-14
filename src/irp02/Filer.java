@@ -9,11 +9,12 @@ public class Filer {
 	// Creates File parse.txt and store list of URLs and their depth
 	void createFile(String path, HashSet<String> contents) {
 		try {
+			path += "index/";
 			File file = new File(path);
 			if (!file.exists()) {
 				file.mkdir();
 			}
-			path += "/pages.txt";
+			path += "pages.txt";
 			file = new File(path);
 			if (file.createNewFile()) {
 				System.out.println("File created");

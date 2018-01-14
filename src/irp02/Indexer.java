@@ -43,7 +43,7 @@ public class Indexer {
 			IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
 			indexwriter = new IndexWriter(directory, config);
 		} catch (IOException e) {
-			System.err.println("Error :: " + e.getMessage());
+			System.err.println("Erroasdsadr :: " + e.getMessage());
 		}
 	}
 
